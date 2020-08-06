@@ -1,8 +1,8 @@
 <mat-card class="card-wrapper">
   <mat-card-content class="time-wrapper">
     <mat-card-title class="time"
-      >{{ hours }}:{{ minutes }}:{{ seconds }}</mat-card-title
-    >
+      >{{ seconds * 1000 | date: "HH:mm:ss":"UTC" }}
+    </mat-card-title>
   </mat-card-content>
   <mat-card-actions>
     <button mat-stroked-button color="primary" (click)="start()">Start</button>

@@ -13,8 +13,6 @@ export class StopwatchComponent implements OnInit {
 
   running = false;
 
-  hours = 0;
-  minutes = 0;
   seconds;
 
   private counterSubject: Subject<{
@@ -36,7 +34,7 @@ export class StopwatchComponent implements OnInit {
           state.pause
             ? NEVER
             : interval(1000).pipe(
-                tap((val) => {
+                tap(() => {
                   state.counterValue += 1;
                   this.seconds = state.counterValue;
                 })
