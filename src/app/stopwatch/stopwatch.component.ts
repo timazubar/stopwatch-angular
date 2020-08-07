@@ -1,6 +1,15 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { interval, Subscription, Subject, NEVER } from 'rxjs';
-import { map, scan, startWith, tap, switchMap } from 'rxjs/operators';
+import { fromEvent, interval, Subscription, Subject, NEVER } from 'rxjs';
+import {
+  debounceTime,
+  filter,
+  map,
+  scan,
+  startWith,
+  tap,
+  switchMap,
+  buffer,
+} from 'rxjs/operators';
 
 @Component({
   selector: 'app-stopwatch',
@@ -57,7 +66,18 @@ export class StopwatchComponent implements OnInit {
   }
 
   wait() {
-    this.counterSubject.next({ pause: true });
+    const waitButton = document.querySelector('.double');
+    const mouse$ = fromEvent(waitButton, 'click');
+
+    const buff$ = mouse$.pipe(debounceTime(300));
+
+    const click$ = mouse$.pipe(
+      buffer(buff$),
+      map((list) => list.length),
+      filter((x) => x === 2)
+    );
+
+    click$.subscribe(() => this.counterSubject.next({ pause: true }));
   }
 
   ngOnInit(): void {

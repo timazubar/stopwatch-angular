@@ -7,7 +7,9 @@
   <mat-card-actions>
     <button mat-stroked-button color="primary" (click)="start()">Start</button>
     <button mat-stroked-button color="primary" (click)="stop()">Stop</button>
-    <button mat-stroked-button color="primary" (dblclick)="wait()">Wait</button>
+    <button mat-stroked-button color="primary" class="double" (click)="wait()">
+      Wait
+    </button>
     <button mat-stroked-button color="primary" (click)="reset()">Reset</button>
   </mat-card-actions>
 </mat-card>
